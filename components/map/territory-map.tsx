@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef, useCallback, useState, useId } from 'react'
 import {
   MapContainer,
   TileLayer,
@@ -11,12 +11,11 @@ import {
   useMap,
   useMapEvents,
 } from 'react-leaflet'
-import type { LatLngExpression, LeafletMouseEvent } from 'leaflet'
+import type { LatLngExpression, LeafletMouseEvent, Map as LeafletMap } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { useTerritoryStore } from '@/lib/store/territory-store'
 import type { Territory } from '@/lib/territory/types'
 import { formatArea } from '@/lib/territory/geo'
-import { TERRITORY_COLORS } from '@/lib/territory/types'
 import { Button } from '@/components/ui/button'
 import { Crosshair, MapPin, Shield, Swords } from 'lucide-react'
 
@@ -310,6 +309,10 @@ function DrawingLayer() {
 }
 
 export function TerritoryMap() {
+  const mapId = useId()
+  const mapRef = useRef<LeafletMap | null>(null)
+  const [isMapReady, setIsMapReady] = useState(false)
+  
   const {
     territories,
     currentUserId,
@@ -326,13 +329,26 @@ export function TerritoryMap() {
     [selectTerritory, selectedTerritoryId]
   )
 
+  // Cleanup map on unmount to prevent reuse issues
+  useEffect(() => {
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove()
+        mapRef.current = null
+      }
+    }
+  }, [])
+
   return (
     <MapContainer
+      key={mapId}
+      ref={mapRef}
       center={[mapCenter[1], mapCenter[0]]}
       zoom={mapZoom}
       className="h-full w-full"
       zoomControl={true}
       attributionControl={false}
+      whenReady={() => setIsMapReady(true)}
     >
       {/* Dark theme tiles - CartoDB Dark Matter */}
       <TileLayer
