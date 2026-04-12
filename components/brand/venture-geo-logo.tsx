@@ -205,7 +205,7 @@ export function VentureGeoBrandLogo({
   return (
     <div
       className={cn(
-        'inline-flex items-center justify-center rounded-lg bg-tr-navy-deep px-2 py-1',
+        'inline-flex items-center justify-center rounded-lg px-2 py-1',
         className
       )}
     >
@@ -215,7 +215,7 @@ export function VentureGeoBrandLogo({
         width={w}
         height={height}
         className="object-contain"
-        style={{ height, width: 'auto', maxWidth: 'min(100%, 168px)' }}
+        style={{ height, width: 'auto', maxWidth: 'min(100%, 230px)' }}
         priority={priority}
       />
     </div>
