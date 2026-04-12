@@ -1,11 +1,14 @@
 import type { ReactNode } from 'react'
+import { redirect } from 'next/navigation'
 
-import { AuthGuard } from '@/components/auth/auth-guard'
+import { auth } from '@/auth'
 
-export default function MapaLayout({
+export default async function MapaLayout({
   children,
 }: {
   children: ReactNode
 }) {
-  return <AuthGuard>{children}</AuthGuard>
+  const session = await auth()
+  if (!session) redirect('/login')
+  return <>{children}</>
 }

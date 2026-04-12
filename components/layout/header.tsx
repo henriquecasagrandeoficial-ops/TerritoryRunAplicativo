@@ -1,21 +1,23 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import { signOut, useSession } from 'next-auth/react'
 import { useTerritoryStore } from '@/lib/store/territory-store'
-import { useAuthStore } from '@/lib/store/auth-store'
 import { Button } from '@/components/ui/button'
 import { formatArea } from '@/lib/territory/geo'
 import { LogOut, Map, Settings, Trophy, User } from 'lucide-react'
 
 export function Header() {
-  const router = useRouter()
-  const logout = useAuthStore((s) => s.logout)
+  const { data: session } = useSession()
   const { territories, currentUserId, getTotalAreaForUser, users } =
     useTerritoryStore()
 
   const currentUser = users.find((u) => u.id === currentUserId)
   const myTerritories = territories.filter((t) => t.userId === currentUserId)
   const myTotalArea = getTotalAreaForUser(currentUserId)
+
+  const displayName =
+    session?.user?.name ?? currentUser?.displayName ?? 'Corredor'
 
   return (
     <header className="h-14 bg-card border-b border-border px-4 flex items-center justify-between shrink-0">
@@ -68,10 +70,7 @@ export function Header() {
           variant="ghost"
           size="icon"
           className="h-9 w-9"
-          onClick={() => {
-            logout()
-            router.replace('/')
-          }}
+          onClick={() => signOut({ callbackUrl: '/' })}
           aria-label="Sair"
         >
           <LogOut className="h-4 w-4" />
@@ -80,11 +79,22 @@ export function Header() {
           <Settings className="h-4 w-4" />
         </Button>
         <Button variant="ghost" className="h-9 gap-2 px-2">
-          <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
-            <User className="h-4 w-4 text-primary" />
+          <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden relative">
+            {session?.user?.image ? (
+              <Image
+                src={session.user.image}
+                alt=""
+                width={28}
+                height={28}
+                className="object-cover"
+                unoptimized
+              />
+            ) : (
+              <User className="h-4 w-4 text-primary" />
+            )}
           </div>
-          <span className="hidden sm:inline text-sm font-medium">
-            {currentUser?.displayName || 'Demo'}
+          <span className="hidden sm:inline text-sm font-medium max-w-[120px] truncate">
+            {displayName}
           </span>
         </Button>
       </div>

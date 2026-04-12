@@ -30,7 +30,12 @@ export default function HomePage() {
               </div>
               <span className="text-xl font-bold text-foreground">TerritoryRun</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap justify-end">
+              <Link href="/cadastro">
+                <Button variant="ghost" className="text-muted-foreground">
+                  Cadastro
+                </Button>
+              </Link>
               <Link href="/login">
                 <Button variant="outline" className="border-border shadow-xs">
                   Entrar

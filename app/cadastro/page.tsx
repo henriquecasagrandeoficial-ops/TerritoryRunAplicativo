@@ -1,9 +1,7 @@
 import Link from 'next/link'
-import { Suspense } from 'react'
 import { Map } from 'lucide-react'
 
-import { LoginForm } from '@/components/auth/login-form'
-import { Spinner } from '@/components/ui/spinner'
+import { RegisterForm } from '@/components/auth/register-form'
 import {
   Card,
   CardContent,
@@ -12,11 +10,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-export default function LoginPage() {
-  const googleEnabled = Boolean(
-    process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET,
-  )
-
+export default function CadastroPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 pointer-events-none" />
@@ -42,27 +36,13 @@ export default function LoginPage() {
 
         <Card className="border-border shadow-lg">
           <CardHeader className="text-center space-y-1">
-            <CardTitle className="text-2xl">Entrar</CardTitle>
+            <CardTitle className="text-2xl">Criar conta</CardTitle>
             <CardDescription>
-              Use sua conta para acessar o mapa e seus territórios.
+              Cadastre-se para salvar seu progresso e acessar o mapa.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <Suspense
-              fallback={
-                <div className="flex justify-center py-12">
-                  <Spinner className="size-8 text-primary" />
-                </div>
-              }
-            >
-              <LoginForm googleEnabled={googleEnabled} />
-            </Suspense>
-            <p className="text-center text-sm text-muted-foreground border-t border-border pt-4">
-              Não tem conta?{' '}
-              <Link href="/cadastro" className="text-accent hover:underline">
-                Criar conta
-              </Link>
-            </p>
+          <CardContent>
+            <RegisterForm />
           </CardContent>
         </Card>
 
