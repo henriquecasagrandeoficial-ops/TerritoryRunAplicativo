@@ -22,7 +22,7 @@ export function Header() {
     <header className="h-14 bg-card border-b border-border px-4 flex items-center justify-between shrink-0">
       {/* Logo */}
       <div className="flex items-center gap-3">
-        <VentureGeoBrandLogo height={30} />
+        <VentureGeoBrandLogo height={42} />
         <div>
           <h1 className="text-lg font-bold text-foreground leading-none">
             TerritoryRun

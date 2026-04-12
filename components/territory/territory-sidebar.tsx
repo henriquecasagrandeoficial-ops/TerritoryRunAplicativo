@@ -83,7 +83,7 @@ export function TerritorySidebar() {
           <ChevronRight className="h-4 w-4 text-muted-foreground" />
         </Button>
         <div className="flex flex-col items-center gap-4">
-          <VentureGeoBrandLogo height={26} className="px-1.5" />
+          <VentureGeoBrandLogo height={38} className="px-1.5" />
           <div className="text-sm font-mono font-bold text-[#CCFF00]">
             {territories.length}
           </div>
@@ -104,7 +104,7 @@ export function TerritorySidebar() {
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2 min-w-0">
-            <VentureGeoBrandLogo height={28} className="shrink-0" />
+            <VentureGeoBrandLogo height={42} className="shrink-0" />
             <h2 className="font-semibold text-foreground truncate">Territorios</h2>
           </div>
           <Button

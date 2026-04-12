@@ -28,7 +28,7 @@ export default function LoginPage() {
           href="/"
           className="flex items-center justify-center gap-3 mb-8 text-foreground hover:text-primary transition-colors"
         >
-          <VentureGeoBrandLogo height={32} />
+          <VentureGeoBrandLogo height={48} />
           <span className="text-xl font-bold">TerritoryRun</span>
         </Link>
 

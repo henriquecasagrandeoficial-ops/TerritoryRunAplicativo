@@ -194,7 +194,7 @@ export function TerritoryRunLogo({
 
 export function VentureGeoBrandLogo({
   className,
-  height = 32,
+  height = 44,
   priority = false,
 }: {
   className?: string
@@ -205,7 +205,7 @@ export function VentureGeoBrandLogo({
   return (
     <div
       className={cn(
-        'inline-flex items-center justify-center rounded-lg px-2 py-1',
+        'inline-flex items-center justify-center rounded-lg px-2.5 py-1.5',
         className
       )}
     >
@@ -215,7 +215,7 @@ export function VentureGeoBrandLogo({
         width={w}
         height={height}
         className="object-contain"
-        style={{ height, width: 'auto', maxWidth: 'min(100%, 230px)' }}
+        style={{ height, width: 'auto', maxWidth: 'min(100%, 320px)' }}
         priority={priority}
       />
     </div>

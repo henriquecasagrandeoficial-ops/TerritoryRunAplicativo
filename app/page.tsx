@@ -26,7 +26,7 @@ export default function HomePage() {
           {/* Nav */}
           <nav className="flex items-center justify-between mb-16">
             <div className="flex items-center gap-3">
-              <VentureGeoBrandLogo height={34} priority />
+              <VentureGeoBrandLogo height={52} priority />
               <span className="text-xl font-bold text-foreground">TerritoryRun</span>
             </div>
             <div className="flex items-center gap-2">
